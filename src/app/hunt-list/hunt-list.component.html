@@ -1,0 +1,14 @@
+<div class="col-md-3" style="opacity:0.9;">
+  <div class="panel panel-info">
+    <div class="panel-heading text-center">
+      Hunts
+    </div>
+    <div class="panel-body hunt-list-div">
+      <h5 class="text-center">Search</h5>
+      <input class="col-xs-12" type="text"/>
+      <div class="text-center" *ngFor="let hunt of hunts">
+        <span style="cursor:pointer;" (click)="onSelect(hunt)">{{hunt.date}}</span>
+      </div>
+    </div>
+  </div>
+</div>

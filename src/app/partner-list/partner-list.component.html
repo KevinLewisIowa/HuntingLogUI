@@ -1,0 +1,10 @@
+<div *ngIf="hasPartners; else noPeople">
+  <div *ngFor="let person of people">
+    {{person.name}}
+  </div>
+</div>
+<ng-template #noPeople>
+  <div class="text-center">
+    No Hunting Partners
+  </div>
+</ng-template>

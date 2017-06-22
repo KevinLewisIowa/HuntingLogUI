@@ -1,0 +1,16 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Species</th>
+      <th>Drakes</th>
+      <th>Hens</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let ducks of shotDucks">
+      <td>{{ducks.species}}</td>
+      <td>{{ducks.drake}}</td>
+      <td>{{ducks.hen}}</td>
+    </tr>
+  </tbody>
+</table>
