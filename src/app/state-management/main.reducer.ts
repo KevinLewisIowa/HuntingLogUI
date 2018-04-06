@@ -1,8 +1,8 @@
 import { GET_HUNTS } from './main.actions';
 import { CREATE_HUNT } from './main.actions';
-import { MainStore, IMainStore } from './main.store';
+import { UserStore, IUserStore } from './main.store';
 
-export function MainReducer (state : IMainStore = MainStore, {type, payload}) {
+export function MainReducer (state : IUserStore = UserStore, {type, payload}) {
     switch (type){
         case (GET_HUNTS):
             return Object.assign({}, state, {

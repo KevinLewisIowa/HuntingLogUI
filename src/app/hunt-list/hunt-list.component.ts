@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HuntService } from '../hunt.service';
 import { Hunt } from '../hunt';
 import { Store } from '@ngrx/store';
-import { IMainStore } from '../state-management/main.store';
+import { IMainStore, IUserStore } from '../state-management/main.store';
 
 @Component({
   selector: 'hunt-list',
@@ -19,7 +19,7 @@ hunts: Hunt [];
   ngOnInit() {
     this.store.select('user')//.filter((data : IMainStore) => !!data)
       .subscribe(
-          (data : IMainStore) => {
+          (data : IUserStore) => {
             this.hunts = [];
             if(data.hunts != undefined && data.hunts.length > 0){
               this.hunts = data.hunts;

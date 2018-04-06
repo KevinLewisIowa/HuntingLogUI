@@ -23,6 +23,12 @@ export class HuntService {
 
   constructor(private http: Http, private store: Store<IMainStore>) { }
 
+  getUserByToken(sessionToken: string) {
+    this.http.get(this.baseUrl + `getUserByToken?sessionToken=${sessionToken}`)
+      .toPromise()
+      .then(response => response.json())
+  }
+
   getHunts(){
     return this.http.get(this.baseUrl + `hunts`).toPromise()
           .then(response => response.json().data as Hunt[])

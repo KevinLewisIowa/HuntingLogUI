@@ -1,5 +1,8 @@
-import { Component }          from '@angular/core';
+import { Component , OnInit}          from '@angular/core';
 import { HuntListComponent } from './hunt-list/hunt-list.component';
+import { Store } from "@ngrx/store";
+import { IMainStore } from "app/state-management/main.store";
+import { HuntService } from "app/hunt.service";
 
 @Component({
   selector: 'app-root',
@@ -15,7 +18,6 @@ import { HuntListComponent } from './hunt-list/hunt-list.component';
     </nav>
   </header>
   <div class="container">
-    <hunt-list></hunt-list>
     <router-outlet></router-outlet>
   </div>
   <footer class="text-right" style="padding-right:30px; background:white;width:100%;opacity:0.8;">
@@ -24,6 +26,20 @@ import { HuntListComponent } from './hunt-list/hunt-list.component';
   `,
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Hunting Log';
+
+  constructor(private store: Store<IMainStore>, private huntService: HuntService) {
+    
+  }
+
+  ngOnInit() {
+    const sessionToken = window.sessionStorage.getItem('sessionToken');
+
+    if (sessionToken == null) {
+      // redirect to login / create user screen
+    } else {
+      // call api to get user info
+    }
+  }
 }
