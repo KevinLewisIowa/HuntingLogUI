@@ -71,7 +71,7 @@ export class HuntService {
   }
 
   getShotDucks(id: number): Promise<ShotDucks[]> {
-    const url = `${this.baseUrl}hunt_duck_counts/?huntId=${id}`;
+    const url = `${this.baseUrl}getDucksForHunt/?huntId=${id}`;
     return this.http.get(url)
     .toPromise()
     .then(response =>
