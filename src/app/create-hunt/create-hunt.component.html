@@ -1,3 +1,53 @@
-<p>
-  create-hunt works!
-</p>
+
+  <div class="col-md-9" style="opacity:0.9;">
+    <div class="panel panel-info">
+      <div class="panel-heading text-center">
+        Create Hunt
+      </div>
+      <div class="panel-body">
+        <div class="col-md-6">
+          <div>
+            <label class="col-md-6">Date: </label>
+            <input class="col-md-6" [(ngModel)]="hunt.date" />
+          </div>
+          <div>
+            <label class="col-md-6">Location: </label>
+            <input class="col-md-6" [(ngModel)]="hunt.location" />
+          </div>
+          <div>
+            <label class="col-md-6">Temperature: </label>
+            <input class="col-md-6" [(ngModel)]="hunt.temperature" />
+          </div>
+          <div>
+            <label class="col-md-6">Wind Direction: </label>
+            <input class="col-md-6" [(ngModel)]="hunt.windDirection" />
+          </div>
+          <div>
+            <label class="col-md-6">Wind Speed: </label>
+            <input class="col-md-6" [(ngModel)]="hunt.windSpeed" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div>
+            <label class="col-md-6">Shots Fired: </label>
+            <input class="col-md-26" [(ngModel)]="hunt.shotsFired" />
+          </div>
+          <div>
+            <label class="col-md-6">Gun Used: </label>
+            <input class="col-md-6" [(ngModel)]="hunt.gunUsed" />
+          </div>
+          <div>
+            <label class="col-md-6">Dog: </label>
+            <input class="col-md-6" [(ngModel)]="hunt.dogUsed" />
+          </div>
+          <div>
+            <label class="col-md-6">Retrieves: </label>
+            <input class="col-md-6" [(ngModel)]="hunt.retrieves" />
+          </div>
+          <div>
+            <button (click)="addHunt()">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

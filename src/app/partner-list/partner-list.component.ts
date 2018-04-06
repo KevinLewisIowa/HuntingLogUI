@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Person } from '../person';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { HuntService } from '../hero.service';
+import { HuntService } from '../hunt.service';
 
 @Component({
   selector: 'app-partner-list',

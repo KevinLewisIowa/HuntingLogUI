@@ -2,7 +2,7 @@ import 'rxjs/add/operator/switchMap';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { HuntService } from '../hero.service';
+import { HuntService } from '../hunt.service';
 import { Hunt } from '../hunt';
 
 @Component({

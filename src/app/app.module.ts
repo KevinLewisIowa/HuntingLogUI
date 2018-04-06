@@ -14,12 +14,20 @@ import { DashboardComponent }   from './dashboard.component';
 import { HuntListComponent } from './hunt-list/hunt-list.component';
 import { HuntDetailComponent } from './hunt-detail/hunt-detail.component';
 //import { HeroesComponent }      from './heroes.component';
-import { HuntService }          from './hero.service';
+import { HuntService }          from './hunt.service';
 import { CreateHuntComponent } from './create-hunt/create-hunt.component';
 import { CreateFishComponent } from './create-fish/create-fish.component';
 import { PartnerListComponent } from './partner-list/partner-list.component';
 import { ShotDuckListComponent } from './shot-duck-list/shot-duck-list.component';
 //import { HeroSearchComponent }  from './hero-search.component';
+
+import { Store, StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { MainReducer } from './state-management/main.reducer';
+
+const reducers = {
+  user: MainReducer
+}
 
 @NgModule({
   imports: [
@@ -27,6 +35,8 @@ import { ShotDuckListComponent } from './shot-duck-list/shot-duck-list.component
     FormsModule,
     HttpModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
+    StoreModule.provideStore(reducers),
+    StoreDevtoolsModule.instrumentOnlyWithExtension(),
     AppRoutingModule
   ],
   declarations: [
