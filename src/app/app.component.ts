@@ -3,6 +3,7 @@ import { HuntListComponent } from './hunt-list/hunt-list.component';
 import { Store } from "@ngrx/store";
 import { IMainStore } from "app/state-management/main.store";
 import { HuntService } from "app/hunt.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,7 @@ import { HuntService } from "app/hunt.service";
 export class AppComponent implements OnInit {
   title = 'Hunting Log';
 
-  constructor(private store: Store<IMainStore>, private huntService: HuntService) {
+  constructor(private store: Store<IMainStore>, private router: Router, private huntService: HuntService) {
     
   }
 
@@ -38,8 +39,10 @@ export class AppComponent implements OnInit {
 
     if (sessionToken == null) {
       // redirect to login / create user screen
+      this.router.navigate(['/login']);
     } else {
       // call api to get user info
+      this.huntService.getUserByToken(sessionToken);
     }
   }
 }

@@ -27,7 +27,7 @@ hunts: Hunt [];
           }
       )
 
-    this.huntService.getHunts();
+    this.huntService.getHunts(window.sessionStorage.getItem('userId'));
     //.then((hunts: Hunt[]) => this.hunts = hunts);
   }
 

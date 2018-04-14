@@ -1,8 +1,8 @@
 import { Injectable }    from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs';
-
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/toPromise';
 
 import { Hunt } from './hunt';
@@ -11,78 +11,67 @@ import { ShotDucks } from './shot-duck';
 import { Store } from '@ngrx/store';
 import { IMainStore } from './state-management/main.store';
 
+const theHeader = new HttpHeaders().set('Content-Type', 'application/json');
+
 @Injectable()
 export class HuntService {
-
-  private headers = new Headers({'Content-Type': 'application/json'});
   //private heroesUrl = 'api/heroes';  // URL to web api
   //private huntsUrl = 'api/hunts'; //URL to web api
   //private huntPartnersUrl = 'api/huntPartners';
   //private shotDucksUrl = 'api/shotDucks';
   private baseUrl = 'https://rocky-depths-92084.herokuapp.com/';
 
-  constructor(private http: Http, private store: Store<IMainStore>) { }
+  constructor(private http: HttpClient, private router: Router, private store: Store<IMainStore>) { }
 
   getUserByToken(sessionToken: string) {
     this.http.get(this.baseUrl + `getUserByToken?sessionToken=${sessionToken}`)
-      .toPromise()
-      .then(response => response.json())
+      .map(payload => {
+        console.log('the user response');
+        console.log(payload);
+        if (payload == null) {
+          // redirect
+          this.router.navigate(['/login']);
+        } else {
+          return {type: 'GOTUSER', payload};
+        }
+      })
+      .subscribe(action => this.store.dispatch(action), error => this.handleError(error));
   }
 
-  getHunts(){
-    return this.http.get(this.baseUrl + `hunts`).toPromise()
-          .then(response => response.json().data as Hunt[])
-          .then(payload => ({ type: 'GET_HUNTS', payload}))
-          .then(action => this.store.dispatch(action));
+  getHunts(userId){
+    return this.http.get(this.baseUrl + `huntsForUser?userId=${userId}`)
+          .map(payload => ({ type: 'GET_HUNTS', payload}))
+          .subscribe(action => this.store.dispatch(action), error => this.handleError(error));
   }
 
-  getHunt(id: number): Promise<Hunt> {
+  getHunt(id: number) : Observable<any>{
     const url = `${this.baseUrl}hunts/${id}`;
     return this.http.get(url)
-    .toPromise()
-    .then(response => response.json().data as Hunt)
-    .catch(this.handleError);
+    .map(response => response)
   }
 
   addHuntTest(hunt: Hunt) {
     console.log('about to add hunt');
-    hunt.id = 20;
-    //this.store.dispatch( { type: 'CREATE_HUNT', payload: hunt });
-    //
-    //new
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    this.http.post(this.baseUrl + `hunts`, { 'hunt': hunt }, options)
-      .toPromise()
-      .then(response => response.json().data as Hunt[])
-          .then(payload => ({ type: 'GET_HUNTS', payload}))
-          .then(action => this.store.dispatch(action));
+    return this.http.post(this.baseUrl + `hunts`, { 'hunt': hunt }, {headers: theHeader})
+              .map(response => response);
   }
 
   addHunt(hunt: Hunt){
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    this.http.post(this.baseUrl + `hunts`, hunt, options)
-    .subscribe(response => response.json());
+    return this.http.post(this.baseUrl + `hunts`, hunt, {headers: theHeader})
+              .map(response => {console.log(response); return response;});
   }
 
-  getHuntPartners(id: number): Promise<Person[]> {
+  getHuntPartners(id: number){
     console.log('about to get partners');
     const url = `${this.baseUrl}hunt_partners/${id}`;
     return this.http.get(url)
-    .toPromise()
-    .then(response => 
-      response.json().data as Person[])
-    .catch(this.handleError);
+    .map(response => {console.log(response); return response;});
   }
 
-  getShotDucks(id: number): Promise<ShotDucks[]> {
+  getShotDucks(id: number) {
     const url = `${this.baseUrl}getDucksForHunt/?huntId=${id}`;
     return this.http.get(url)
-    .toPromise()
-    .then(response =>
-      response.json().data as ShotDucks[])
-    .catch(this.handleError);
+          .map(response => {console.log('ducks'); console.log(response); return response;});
   }
 
   // delete(id: number): Promise<void> {
