@@ -6,12 +6,14 @@ import { HuntDetailComponent } from './hunt-detail/hunt-detail.component';
 import { CreateHuntComponent } from './create-hunt/create-hunt.component';
 import { CreateFishComponent } from './create-fish/create-fish.component';
 import { LoginComponent } from "app/login/login.component";
+import { NewAccountComponent } from "app/new-account/new-account.component";
 
 const routes: Routes = [
    
    { path: 'dashboard', component: DashboardComponent },
   { path: 'detail/:id', component: HuntDetailComponent },
   { path: 'addHunt', component: CreateHuntComponent },
+  { path: 'newAccount', component: NewAccountComponent },
   { path: 'addFish', component: CreateFishComponent },
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' }

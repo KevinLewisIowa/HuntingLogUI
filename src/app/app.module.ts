@@ -1,6 +1,6 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,6 +25,7 @@ import { Store, StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MainReducer } from './state-management/main.reducer';
 import { LoginComponent } from './login/login.component';
+import { NewAccountComponent } from './new-account/new-account.component';
 
 const reducers = {
   user: MainReducer
@@ -34,6 +35,7 @@ const reducers = {
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
     StoreModule.forRoot(reducers),
@@ -49,7 +51,8 @@ const reducers = {
     CreateFishComponent,
     PartnerListComponent,
     ShotDuckListComponent,
-    LoginComponent
+    LoginComponent,
+    NewAccountComponent
     //HeroSearchComponent
   ],
   providers: [ HuntService ],

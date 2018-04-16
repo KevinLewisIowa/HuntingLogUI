@@ -1,16 +1,19 @@
+<form [formGroup]="loginForm">
 <div class="login-box">
   <div class="col-md-12">
     <label>Username: </label>
-    <input type="text" placeholder="username"/>
+    <input type="text" placeholder="username" formControlName="username"/>
   </div>
   <div class="col-md-12">
     <label>Password: </label>
-    <input type="password" placeholder="password"/>
+    <input type="password" placeholder="password" formControlName="password"/>
   </div>
   <div class="col-md-12">
-    <button type="button">Login</button>
+    <button (click)="login()" [disabled]="!loginForm.valid" type="button">Login</button>
   </div>
   <div class="col-md-12">
-    <button type="button">Create New Account</button>
+    <button type="button" (click)="goToNewAccount()">Create New Account</button>
   </div>
+  <span style="color:red;">{{loginMessage}}</span>
 </div>
+</form>

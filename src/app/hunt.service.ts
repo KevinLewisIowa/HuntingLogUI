@@ -38,6 +38,15 @@ export class HuntService {
       .subscribe(action => this.store.dispatch(action), error => this.handleError(error));
   }
 
+  login(userName: string, passWord: string) : Observable<any>{
+    return this.http.post(this.baseUrl + `login`, {username: userName, password: passWord})
+      .map(response => { 
+        console.log('login response');
+        console.log(response);
+        return response;
+      })
+  }
+
   getHunts(userId){
     return this.http.get(this.baseUrl + `huntsForUser?userId=${userId}`)
           .map(payload => ({ type: 'GET_HUNTS', payload}))

@@ -1,4 +1,4 @@
-import { GET_HUNTS } from './main.actions';
+import { GET_HUNTS, LOGGEDIN } from './main.actions';
 import { CREATE_HUNT } from './main.actions';
 import { UserStore, IUserStore } from './main.store';
 
@@ -8,6 +8,8 @@ export function MainReducer (state : IUserStore = UserStore, {type, payload}) {
             return Object.assign({}, state, {
                         hunts: payload
                     });
+        case (LOGGEDIN):
+            return Object.assign({}, state, { user: payload});
         case (CREATE_HUNT):
             //var theHunts = state.hunts;
             //theHunts.add(payload);
